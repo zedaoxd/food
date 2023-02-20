@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Entity(name = "kitchen")
+@Entity(name = "city")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Kitchen implements Serializable {
+public class City implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,7 @@ public class Kitchen implements Serializable {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-
+    @ManyToOne
+    @JoinColumn(name = "state_id", nullable = false)
+    private State state;
 }

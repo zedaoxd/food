@@ -1,19 +1,15 @@
 package com.food.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Entity(name = "kitchen")
+@Entity(name = "role")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Kitchen implements Serializable {
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +19,6 @@ public class Kitchen implements Serializable {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    private String description;
 }
