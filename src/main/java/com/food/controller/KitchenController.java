@@ -5,6 +5,7 @@ import com.food.service.KitchenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,10 @@ public class KitchenController {
     @GetMapping
     public ResponseEntity<List<Kitchen>> getAllKitchens() {
         return ResponseEntity.ok(kitchenService.getAllKitchens());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Kitchen> getKitchenById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(kitchenService.getKitchenById(id));
     }
 }
