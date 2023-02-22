@@ -2,7 +2,6 @@ package com.food.service;
 
 import com.food.model.State;
 import com.food.repository.StateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

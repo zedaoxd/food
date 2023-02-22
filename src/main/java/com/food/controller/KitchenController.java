@@ -2,13 +2,11 @@ package com.food.controller;
 
 import com.food.model.Kitchen;
 import com.food.service.KitchenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,5 +27,24 @@ public class KitchenController {
     @GetMapping("/{id}")
     public ResponseEntity<Kitchen> getKitchenById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(kitchenService.getKitchenById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Kitchen> save(@RequestBody Kitchen kitchen) {
+        var savedKitchen = kitchenService.save(kitchen);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand(savedKitchen.getId()).toUri();
+        return ResponseEntity.created(uri).body(savedKitchen);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Kitchen> update(@PathVariable("id") Long id, @RequestBody Kitchen kitchen) {
+        return ResponseEntity.ok(kitchenService.update(id, kitchen));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        kitchenService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
